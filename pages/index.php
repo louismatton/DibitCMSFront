@@ -13,34 +13,24 @@ $arrpagesVis=array();
 
 foreach($jsonIterator as $key => $val) {
     if ($key === "title") {
-        // $title;
         $title=$val;
     }
     if ($key === "pages") {
-        // print_r($val[0]);
         foreach($val as $pageKey => $page) {
-            // if ($pageKey === "pageTitle") {
-            // print_r($page);
-            // echo "<br><br>";
             foreach($page as $pageel => $valueP) {
                 if($pageel === "pageVisible"){
-                    // echo $valueP;
                     if($valueP==true){
-
                         array_push($arrpagesVis, "true");
                     }else{
                         array_push($arrpagesVis, "false");                        
                     }
-
                 }
                 if ($pageel === "pageTitle") {
-                    // echo $valueP;
                     array_push($arrpages, $valueP);
                 }
             }
         }
     }
-
 }
 ?>
 <head>
@@ -72,36 +62,29 @@ foreach($jsonIterator as $key => $val) {
                             echo '<li><a href="./'.$arrpages[$i].'">'.$arrpages[$i].
                             '</a></li>';
                         }
-
                     }
                 }
                 ?>
             </ul>
         </div>
     </div>
-
 </header>
 <div id="body">
 
 <?php
 $jsonContent = file_get_contents("http://localhost:3000/website/website1/".$paginaTitleQuery);
 
-$jsonIteratorContent = new RecursiveIteratorIterator(new RecursiveArrayIterator(json_decode($jsonContent, TRUE)),RecursiveIteratorIterator::SELF_FIRST);
+$jsonIteratorContent = new RecursiveIteratorIterator(new RecursiveArrayIterator(json_decode($jsonContent, TRUE)), RecursiveIteratorIterator::SELF_FIRST);
 echo '<div id="posts" >';
 
 foreach($jsonIteratorContent as $key => $val) {
 
     if ($key === "posts") {
-        // echo "$key: ";
-        // echo '<div style="border: 2px solid green; padding:5px;">';
         $tel = 0;
         $arrVis = array();
         foreach($val as $postKey => $post) {
-            // echo '<div style="border: 2px solid blue; padding:5px;">';
-            // echo '<div class="post">';
             foreach($post as $postKey1 => $postval) {
                 if ($postKey1 === "postVisible") {
-                    // echo "*".$postval;
                     if ($postval == 1) {
                         array_push($arrVis, "true");
 
@@ -122,20 +105,23 @@ foreach($jsonIteratorContent as $key => $val) {
                         $postval = str_replace("\n", "<br>", $postval);
                         echo '<p class="postText">'.$postval.'</p>';
                     }
-
+                    if ($postKey1 === "postPhotos") {
+                        for ($i = 0; $i < count($postval); $i++) {
+                            echo '<img src="'.$postval[$i].'">';
+                        }
+                    }
                 }
                 echo '<hr>';
                 echo '</section>';
             }
-            // }
             $tel++;
         }
-        // echo '</div>';
     }
-
 }
+
 echo '</div>';
 ?>
+
 </div>
 </body>
 </html>
