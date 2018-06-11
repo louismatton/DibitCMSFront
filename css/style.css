@@ -96,3 +96,12 @@ header .logo {
     /* margin-top: 20px; */
     margin: 0 auto;
 }
+.image{
+    width:auto;
+    height:180px;
+    border-radius: 5px;
+    margin:5px;
+}
+.selected a{
+    border-bottom:1px solid white;
+}
