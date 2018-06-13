@@ -2,7 +2,7 @@
 <html lang="en">
 <?php
 //pag title invullen
-$paginaTitle="home";
+$paginaTitle="nieuwe pagina";
 $websiteTitle="website1";
 
 $paginaTitleQuery=str_replace(" ","%20",$paginaTitle);
